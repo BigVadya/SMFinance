@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django import forms
 
@@ -7,6 +7,54 @@ class EditProfileForm(UserChangeForm):
 	class Meta:
 		model = User
 		fields = ('username', 'first_name', 'last_name', 'email', 'password',)
+
+	def __init__(self, *args, **kwargs):
+	    super(EditProfileForm, self).__init__(*args, **kwargs)
+
+	    self.fields['username'].widget.attrs['class'] = 'form-control'
+	    self.fields['username'].widget.attrs['placeholder'] = 'Логин'
+	    self.fields['username'].label = 'Логин'
+	    self.fields['username'].help_text = '<span class="form-text text-muted"><small>Требуемый. Не более 150 символов. Только буквы, цифры и @/./+/-/_.</small></span>'
+
+	    self.fields['first_name'].widget.attrs['class'] = 'form-control'
+	    self.fields['first_name'].widget.attrs['placeholder'] = 'Имя'
+	    self.fields['first_name'].label = 'Имя'
+
+	    self.fields['last_name'].widget.attrs['class'] = 'form-control'
+	    self.fields['last_name'].widget.attrs['placeholder'] = 'Фамилия'
+	    self.fields['last_name'].label = 'Фамилия'
+
+	    self.fields['email'].widget.attrs['class'] = 'form-control'
+	    self.fields['email'].widget.attrs['placeholder'] = 'Адресс почты'
+	    self.fields['email'].label = 'Адресс почты'
+
+
+
+
+
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+	old_password = forms.CharField(label='Старый пароль', widget=forms.PasswordInput)
+	new_password1 = forms.CharField(label='Новый пароль', widget=forms.PasswordInput)
+	new_password2 = forms.CharField(label='Подтвердите новый пароль', widget=forms.PasswordInput)
+	class Meta:
+		model = User
+		fields = ('old_password', 'new_password1', 'new_password2',)
+
+	def __init__(self, *args, **kwargs):
+		super(CustomPasswordChangeForm, self).__init__(*args, **kwargs)
+
+		self.fields['old_password'].widget.attrs['class'] = 'form-control'
+		self.fields['old_password'].widget.attrs['placeholder'] = 'Старый пароль'
+		self.fields['old_password'].label = 'Старый пароль'
+
+		self.fields['new_password1'].widget.attrs['class'] = 'form-control'
+		self.fields['new_password1'].widget.attrs['placeholder'] = 'Новый пароль'
+		self.fields['new_password1'].label = 'Новый пароль'
+
+		self.fields['new_password2'].widget.attrs['class'] = 'form-control'
+		self.fields['new_password2'].widget.attrs['placeholder'] = 'Подтвердите новый пароль'
+		self.fields['new_password2'].label = 'Подтвердите новый пароль'
 
 
 class SignUpForm(UserCreationForm):
