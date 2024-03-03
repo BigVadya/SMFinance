@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Django-specific template tags -->
+    {% load static %}
+
+    <!-- General HTML head elements -->
+    <title>Financial Analyst Website</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}" >
+    <link rel="icon" href="{% static 'icon.png' %}" type="image/x-icon">
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <a class="finLink" href="/">
+            <div class="ImgNtTitle">
+                <img src="{% static 'icon.png' %}" >
+                <span id="titleFin">SMFinance</span>
+            </div>
+        </a>
+        <ul class="navbar-nav ml-auto">
+          
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
+            </li>
+            <li class="nav-item" >
+              <a class="nav-link" id="avatar" href="{% url 'home' %}"><img src="{% static 'avatar.png' %}"><span id="mar">Аккаунт</span></a>
+              
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Войти</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
+            </li>
+          {% endif %}
+          
+        </ul>
+        
+      
+    </nav>
+
+  
+
+    <br/>
+    <div class="container">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-warning alert-dismissable" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+
+
+
+  {% block content %}
+  
+
+  {% endblock %}
+  </div>
+  <div style="height: 700px;">
+    
+  </div>
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2024 SMFinance. Все права защищены.</p>
+      <ul>
+        <li><a href="#">Про нас</a></li>
+        <li><a href="#">Связаться с нами</a></li>
+        <li><a href="#">Политика конфиденциальности</a></li>
+        <li><a href="#">Условия обслуживания</a></li>
+      </ul>
+    </div>
+  </footer>
+
+<script src="{% static 'main.js' %}"></script>
+</body>
+</html>
