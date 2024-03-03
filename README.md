@@ -10,19 +10,24 @@
 git clone https://github.com/BigVadya/SMFinance
 ```
 
-2. Установите зависимости:
+2. Перейдите в каталог:
+```
+cd SMFinance
+
+```
+3. Установите зависимости:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Примените миграции:
+4. Примените миграции:
 
 ```bash
 python manage.py migrate
 ```
 
-4. Запустите сервер разработки:
+5. Запустите сервер разработки:
 
 ```bash
 python manage.py runserver
